@@ -1,0 +1,61 @@
+.navbarContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  width: 90%;
+  margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+.logo {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.linkContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 1.25rem;
+  margin-left: 4rem;
+}
+
+.navLink {
+  cursor: pointer;
+  color: #a0aec0;
+  transition: color 0.3s, transform 0.3s;
+  text-decoration: none;
+}
+
+.navLink:hover {
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.connectButton {
+  background-color: #fff;
+  padding: 0.5rem 2rem;
+  font-size: 1.25rem;
+  color: #000;
+  border-radius: 999px;
+  transition: background-color 0.3s;
+}
+
+.connectButton:hover {
+  background-color: #7cfea2;
+}
+
+.addressContainer {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.profileImage {
+  border-radius: 50%;
+}
+
+.addressText {
+  font-weight: bold;
+}
