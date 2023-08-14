@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from "react-router-dom";
 import "./navbar.css"; // Import the CSS module
 
 const Navbar = () => {
   const [isSignupPage, setIsSignupPage] = useState(true);
   const location = useLocation();
-  const isSignUpPage = location.pathname === '/signup';
-  
+  const isSignUpPage = location.pathname === "/signup";
+  const isDashboardLink = window.location.pathname === '/dashboard';
+
   return (
     <div className="navbarContainer">
       <a href="/" className="logo">
@@ -26,16 +27,22 @@ const Navbar = () => {
           explorer
         </a>
       </div>
-      <Link to={isSignUpPage ? '/signin' : '/signup'}>
-        <button
-          className="connectButton"
-          onClick={() => {
-            setIsSignupPage(!isSignupPage); // Toggle between signup and signin
-          }}
-        >
-          {isSignupPage ? "Signin" : "Signup"}
-        </button>
-      </Link>
+      <div>
+        <Link to={isSignUpPage ? "/signin" : "/signup"}>
+          <button
+            className="connectButton"
+            onClick={() => {
+              if (isDashboardLink) {
+                // Handle logout action
+              } else {
+                setIsSignupPage(!isSignupPage); // Toggle between signup and signin
+              }
+            }}
+          >
+            {isDashboardLink ? "Logout" : isSignupPage ? "Signin" : "Signup"}
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };
