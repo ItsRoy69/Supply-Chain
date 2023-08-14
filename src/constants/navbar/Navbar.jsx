@@ -1,11 +1,17 @@
-import React from 'react';
-
-import './navbar.css'; // Import the CSS module
+import React, { useState } from "react";
+import { Link, useLocation } from 'react-router-dom';
+import "./navbar.css"; // Import the CSS module
 
 const Navbar = () => {
+  const [isSignupPage, setIsSignupPage] = useState(true);
+  const location = useLocation();
+  const isSignUpPage = location.pathname === '/signup';
+  
   return (
     <div className="navbarContainer">
-      <p className="logo">Walmart</p>
+      <a href="/" className="logo">
+        Walmart
+      </a>
       <div className="linkContainer">
         <a href="/" className="navLink">
           home
@@ -20,9 +26,16 @@ const Navbar = () => {
           explorer
         </a>
       </div>
-      <button className="connectButton">
-        Connect Wallet
-      </button>
+      <Link to={isSignUpPage ? '/signin' : '/signup'}>
+        <button
+          className="connectButton"
+          onClick={() => {
+            setIsSignupPage(!isSignupPage); // Toggle between signup and signin
+          }}
+        >
+          {isSignupPage ? "Signin" : "Signup"}
+        </button>
+      </Link>
     </div>
   );
 };

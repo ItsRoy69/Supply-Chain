@@ -1,0 +1,53 @@
+/* styles.css */
+.footer-container {
+    width: 100%;
+    color: white;
+    padding: 20px;
+    margin-top: 150px;
+  }
+  
+  .footer-title {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .footer-description {
+    color: gray;
+    margin-bottom: 4px;
+  }
+  
+  .footer-design {
+    color: gray;
+    margin-bottom: 12px;
+    font-family: Poppins, sans-serif;
+  }
+  
+  .footer-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: lighter;
+  }
+  
+  .footer-copyright {
+    font-size: small;
+  }
+  
+  .footer-links {
+    display: flex;
+    gap: 8px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .footer-link-item {
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .footer-link-item:hover {
+    transform: scale(1.05);
+  }
+  
