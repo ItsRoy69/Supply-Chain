@@ -12,44 +12,20 @@ export const TeamFinderCard = ({ setModal }) => {
           e.stopPropagation();
         }}
       >
-        <div className="teamfindercardbody">
+        <div className="teamfindercardbody2">
           <img className="teamfindercardbg" src={land_grad} alt="gradient" />
           <div className="teamfindercontent">
-            <h1>Ask your requirements</h1>
+            <h1>Confirm Your Deal</h1>
             <form action="" className="teamfinderform">
               <div className="teamfinderinputs">
-                <h4>Title : </h4>
+                <h4>Your Deal : </h4>
                 <div className="inputbox">
                   <input
                     name="title"
-                    placeholder="Role You Searching For"
+                    placeholder="Rs"
                     type="text"
                     required
                   />
-                </div>
-              </div>
-              <div className="teamfinderinputs">
-                <h4>Email : </h4>
-                <div className="inputbox">
-                  <input
-                    name="email"
-                    placeholder="Enter your email"
-                    type="email"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="teamfinderskills">
-                <div className="teamfinderskillhead">
-                  <h4>Requirements : </h4>
-                  <div className="inputbox">
-                    <input
-                      name="requirements"
-                      placeholder="Enter the requirements you are looking for"
-                      type="text"
-                      required
-                    />
-                  </div>
                 </div>
               </div>
             </form>

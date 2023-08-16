@@ -26,7 +26,7 @@
   .profile-summary .username {
     font-size: 20px;
     font-weight: bold;
-    color: #306bff;
+    color: #fb8500;
   }
   .profile-summary .title {
     font-size: 16px;
@@ -57,7 +57,7 @@
     align-items: center;
     gap: 10px;
     border-radius: 10px;
-    border: 2px solid #3364ff;
+    border: 2px solid #fb8500;
     box-shadow: 0px 0px 1px 1px #6d6d6d;
     background-color: var(--landing-bg);
   }
@@ -65,7 +65,7 @@
   .profilecount {
     font-size: 16px;
     font-weight: bold;
-    color: #3364ff;
+    color: #fb8500;
   }
   
   .profilecount-sub {
@@ -112,7 +112,7 @@
   
   .welcome-head {
     font-family: "Lexend", sans-serif;
-    color: #306bff;
+    color: #fb8500;
     height: 16vh;
     position: absolute;
     top: 0;
@@ -131,7 +131,7 @@
   }
   
   .welcome-head p {
-    color: #306bff;
+    color: #fb8500;
     padding-top: 20px;
     padding-left: 20px;
     font-size: 20px;
@@ -161,7 +161,7 @@
   
   .feed-search h3 {
     font-family: "Lexend", sans-serif;
-    color: #306bff;
+    color: #fb8500;
   }
   
   .inputbox {
@@ -200,7 +200,7 @@
     width: 75px;
     height: 40px;
     font-size: 20px;
-    background: linear-gradient(123.28deg, #306bff 4.69%, #040e3a 289.88%);
+    background: linear-gradient(123.28deg, #fb8500 4.69%, #040e3a 289.88%);
     color: var(--text-primary);
     border-radius: 8px;
     display: flex;

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./feedcard.css";
 import feed_avatar from "../../assets/avatar2.png";
+import heart_filled from "../../assets/heart_filled.png";
+import { TeamFinderCard } from "./TeamFinderCard";
 
 export const FeedCard = () => {
+  const [modal, setModal] = useState(false);
+
   return (
-    <div className="feed-card">
+    <div className="feed-card" id={modal ? "blurr" : null}>
       <div className="delete-card"></div>
 
       <div className="feed-cardleft">
@@ -18,6 +22,18 @@ export const FeedCard = () => {
           <div className="feedskills">
             <p>Skills Required: </p>
           </div>
+        </div>
+      </div>
+      <div className="feed-cardbottom">
+        <div className="feed-cardbtn" onClick={() => setModal(true)}>
+          {modal && <TeamFinderCard setModal={setModal} />}
+          <p>Connect</p>
+        </div>
+
+        <div className="feed-cardlike">
+          <img src={heart_filled} alt="liked" />
+
+          <p className="likes">10</p>
         </div>
       </div>
     </div>

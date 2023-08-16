@@ -4,17 +4,8 @@
   font-family: "Poppins", sans-serif;
 }
 
-:root {
-  --app-primary: rgb(29, 30, 34);
-}
-
 body {
   margin: 0;
-}
-
-button {
-  background: transparent;
-  border: none;
 }
 
 code,

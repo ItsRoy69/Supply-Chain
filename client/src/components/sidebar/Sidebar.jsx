@@ -21,11 +21,11 @@ const Sidebar = ({ children, setIsLoggedIn, isLoggedIn }) => {
     setIsOpen(!isOpen);
   };
 
-  const {logout} = useUserContext();
+  const { logout } = useUserContext();
 
   const routes = [
     {
-      path: "/",
+      path: "/dashboard",
       name: "Dashboard",
       icon: dashboard_logo,
     },
@@ -35,14 +35,9 @@ const Sidebar = ({ children, setIsLoggedIn, isLoggedIn }) => {
       icon: profile_logo,
     },
     {
-      path: "/hackathons",
-      name: "Hackathons",
+      path: "/bidding",
+      name: "Live Bidding",
       icon: hackathon_logo,
-    },
-    {
-      path: "/articles",
-      name: "Articles",
-      icon: article_logo,
     },
     {
       path: "/messages",
@@ -89,10 +84,10 @@ const Sidebar = ({ children, setIsLoggedIn, isLoggedIn }) => {
             );
           })}
         </div>
-        <button onClick={logout} className="sidebar_bottom">
+        <btn onClick={logout} className="sidebar_bottom">
           <img src={logout_logo} alt="logout" />
           {isOpen && <p>Logout</p>}
-        </button>
+        </btn>
       </motion.div>
       {/* This main will render the individual pages */}
       <main className="dashcontent">{children}</main>

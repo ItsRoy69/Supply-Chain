@@ -66,12 +66,12 @@
   }
   
   .sidebar_bottom {
-    border-top: 2px solid #e5e5e5;
     padding: 10px;
     padding-bottom: 0;
     cursor: pointer;
     flex-direction: row;
     display: flex;
+    background-color: var(--app-primary);
   }
   
   .dashcontent {

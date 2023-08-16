@@ -1,26 +1,53 @@
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Home from "./pages/home/Home";
 import Signup from "./pages/auth/Signup";
 import Signin from "./pages/auth/Signin";
 import Retailer from "./pages/retailer/Retailer";
+import Profile from "./pages/profile/Profile";
 import Sidebar from "./components/sidebar/Sidebar";
+import LiveBidding from "./pages/retailer/livebidding/LiveBidding";
+import Distributor from "./pages/distributor/Distributor"
+
+
 import { useUserContext } from "./context/userContext";
+import "./App.css";
 
 function App() {
+  const { user } = useUserContext();
 
-  const {user} = useUserContext();
-
-  return (
-    user ?    
-      <Router>
-          <Routes>
-            <Route path="/" exact element={<Home />} />
-            <Route path="/dashboard" exact element={<Sidebar> <Retailer /></Sidebar>} />
-          </Routes>
-      </Router> 
-      :
-      <Router>
+  return user ? (
+    <Router>
+      <Routes>
+        <Route path="/" exact element={<Home />} />
+        <Route path="/dashboard" exact element={
+          <Sidebar>
+            <Retailer />
+          </Sidebar>
+         }
+        />
+        <Route path="/profile" exact element={
+          <Sidebar>
+            <Profile />
+          </Sidebar>
+         }
+        />
+        <Route path="/bidding" exact element={
+          <Sidebar>
+            <LiveBidding />
+          </Sidebar>
+         }
+        />
+        <Route path="/dashboard2" exact element={
+          <Sidebar>
+            <Distributor />
+          </Sidebar>
+         }
+        />
+      </Routes>
+    </Router>
+  ) : (
+    <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/connect" element={<Signin />} />

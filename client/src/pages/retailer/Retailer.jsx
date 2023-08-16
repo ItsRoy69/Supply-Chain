@@ -22,7 +22,7 @@ const Retailer = (post) => {
     <div className="dashboard" id={modal ? "blurr" : null}>
       <div className="dashboard-main">
         <div className="welcome-head">
-          <h1>Welcome, User</h1>
+          <h1>Welcome, Retailer</h1>
         </div>
         <div className="finder">
           <motion.div
@@ -31,10 +31,10 @@ const Retailer = (post) => {
             className="finder-box"
             onClick={() => setModal(true)}
           >
-            <img src={findATeammate} alt="Find a teammate" />
+            <img src={findATeammate} alt="Find my products" />
             <p>
               <span className="find">Find</span>
-              <br /> A teammate
+              <br /> Products
             </p>
           </motion.div>
         </div>
