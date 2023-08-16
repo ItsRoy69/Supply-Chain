@@ -7,6 +7,8 @@ import { Select, Skeleton, Container, SimpleGrid, Flex } from "@mantine/core";
 
 const LiveBidding = () => {
   const [search, setSearch] = useState("");
+  const prodarray = JSON.parse(localStorage.getItem("myArray"))
+  console.log("checking products for bidding===>",prodarray)
 
   return (
     <motion.div
@@ -38,17 +40,28 @@ const LiveBidding = () => {
         </div>
 
         <div className="hackathons-list">
-          <motion.div whileHover={{ scale: 1.05 }} className="card">
-            <h1>product.name</h1>
-            <p className="time">Date</p>
-            <p className="time-txt">product.start</p>
-            <p className="time">Ends</p>
-            <p className="time-txt">product rate</p>
-            <p className="status">100</p>
-            <motion.div whileTap={{ scale: 0.9 }} className="participate-btn">
-              Accept
+          {prodarray.length > 0 && <>
+          {prodarray.map((prod)=>{
+            return(
+              <>
+              <motion.div whileHover={{ scale: 1.05 }} className="card">
+            <h1 style={{
+              textTransform:"capitalize"
+            }}>{prod.title}</h1>
+         
+              <p className="time-txt">Auction starts at - !7th Aug</p>
+              <p className="time">Auction ends at - 20th Aug</p>
+              <p className="time-txt">product rate</p>
+              <p className="status">100</p>
+              <motion.div whileTap={{ scale: 0.9 }} className="participate-btn">
+                Accept
+              </motion.div>
             </motion.div>
-          </motion.div>
+            </>
+            )
+          })}
+          </>}
+        
           
         </div>
       </div>

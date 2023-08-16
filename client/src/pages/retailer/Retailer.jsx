@@ -118,6 +118,8 @@ const Retailer = (post) => {
                   setProduct("")
                   setQuantity(0)
                   setModal(false)
+              
+localStorage.setItem('myArray', JSON.stringify(cards));
 
                   
                 }}>
