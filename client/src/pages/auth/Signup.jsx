@@ -5,6 +5,7 @@ import authimg from "../../assets/growth.svg";
 import "./auth.css";
 
 import {ethers} from "ethers";
+import Logo from "../../components/Logo";
 
 const Signup = () => {
   const [displayText, setDisplayText] = useState("Retailer");
@@ -36,7 +37,7 @@ const Signup = () => {
       });
       const account = ethers.utils.getAddress(accounts[0]);
       setAccount(account);
-      // // console.log(`Connected account : ${account}`);
+      console.log(`Connected account : ${account}`);
     } catch (error) {
       console.error("Error connecting MetaMask:", error);
     }
@@ -77,9 +78,7 @@ const Signup = () => {
       <div className="connectLayout-connectLayoutContainer">
         <div className="connectLayout-left">
           <div className="connectLayout-navContainer">
-            <a href="/" className="navbar-logo">
-              SQUAD
-            </a>
+            <Logo />
             <h3
               onClick={handleClick}
               style={{
@@ -179,9 +178,6 @@ const Signup = () => {
               Connect Metamask Wallet
             </Button>
           )}
-          <p style={{cursor: "pointer", color: "white"}}>
-            Already have an account? <a href="/signin">Login</a>
-          </p>
           <Button
             className="common-squadButton"
             style={{width: "fit-content", padding: "0rem 3rem"}}
@@ -189,6 +185,9 @@ const Signup = () => {
           >
             Register Now
           </Button>
+          <p style={{cursor: "pointer", color: "white"}}>
+            Already have an account? <a href="/connect">Login</a>
+          </p>
         </div>
       </div>
     </>

@@ -83,6 +83,7 @@ label {
   border: none;
   border-radius: 0px;
   font-weight: 500;
+  margin-bottom: 1rem;
 }
 
 .common-squadButton:focus {

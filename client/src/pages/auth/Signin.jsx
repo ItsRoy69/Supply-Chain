@@ -3,6 +3,7 @@ import { Image } from "antd";
 import { Button } from "antd";
 import authimg from "../../assets/growth.svg";
 import "./auth.css";
+import Logo from "../../components/Logo";
 
 const Signin = () => {
   const [displayText, setDisplayText] = useState("Retailer");
@@ -23,9 +24,7 @@ const Signin = () => {
       <div className="connectLayout-connectLayoutContainer">
         <div className="connectLayout-left">
           <div className="connectLayout-navContainer">
-            <a href="/" className="navbar-logo">
-              SQUAD
-            </a>
+            <Logo/>
             <h3
               onClick={handleClick}
               style={{
@@ -71,7 +70,7 @@ const Signin = () => {
             Connect Wallet
           </Button>
           <p style={{ cursor: "pointer", color: "white" }}>
-            Don't have an account? <a href="/connect">Signup</a>
+            Don't have an account? <a href="/signup">Signup</a>
           </p>
         </div>
       </div>

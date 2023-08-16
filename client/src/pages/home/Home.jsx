@@ -4,6 +4,7 @@ import heroimg from "../../assets/hero.svg";
 import belowimg from "../../assets/network.svg";
 import "./home.css";
 import Navbar from "../../components/navbar/Navbar";
+import Footer from "../../components/footer/Footer";
 
 const Home = () => {
   return (
@@ -38,6 +39,7 @@ const Home = () => {
           />
         </div>
       </div>
+      <Footer />
     </>
   );
 };
