@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 export const UserContext = createContext();
 
@@ -8,9 +8,25 @@ export const UserProvider = ({ children }) => {
     
     const [user, setUser] = useState(null);
 
+    useEffect(() => {
+        console.log('user changed', user);
+        const localUser = JSON.parse(localStorage.getItem("walmart-user"));
+        if(user || localUser) {
+            setUser(prev => user ?? localUser)
+            localStorage.setItem("walmart-user", JSON.stringify(user ?? localUser));
+        };
+    }, [user]);
+
+    const logout = () => {
+        setUser(null);
+        localStorage.removeItem("walmart-user");
+        window.location.href = '/';
+    }
+
     const value = {
         user,
-        setUser
+        setUser,
+        logout
     }
 
     return (
