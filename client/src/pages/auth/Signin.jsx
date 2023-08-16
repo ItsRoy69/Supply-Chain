@@ -3,11 +3,18 @@ import { Image } from "antd";
 import { Button } from "antd";
 import authimg from "../../assets/growth.svg";
 import "./auth.css";
+import { toast } from "react-hot-toast";
 import Logo from "../../components/Logo";
+import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../../context/userContext";
+import { set } from "mongoose";
 
 const Signin = () => {
   const [displayText, setDisplayText] = useState("Retailer");
   const [textTitle, setTextTitle] = useState("Distributor");
+
+  const navigate = useNavigate();
+  const {setUser} = useUserContext();
 
   const handleClick = () => {
     if (displayText === "Retailer") {
@@ -18,6 +25,36 @@ const Signin = () => {
       setTextTitle("Distributor");
     }
   };
+
+  const loginUser = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const entries = Object.fromEntries(formData.entries());
+    console.log(entries);
+    const loadingToast = toast.loading("Registering...");
+    try {
+      const response = await fetch("http://localhost:5000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(entries),
+      });
+
+      const responseData = await response.json();
+      console.log(responseData);
+      if(responseData.error) throw (responseData.error);
+      toast.success("Logged in successfully");
+      setUser(prev => responseData.user);
+      navigate("/dashboard"); // navigate to login page
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error(error ?? "Error logging in");
+    }
+    finally {
+      toast.dismiss(loadingToast);
+    }
+  }
 
   return (
     <>
@@ -42,7 +79,7 @@ const Signin = () => {
             alt="Connect Wallet" // Provide alt text for accessibility
           />
         </div>
-        <div className="connectLayout-right">
+        <form onSubmit={loginUser} className="connectLayout-right">
           <h1 className="connectLayout-title">Login as {textTitle}</h1>
           <h4 className="connectLayout-subtitle">
             You need to connect to your crypto wallet to continue
@@ -50,6 +87,7 @@ const Signin = () => {
           <div className="connectLayout_registrationbox">
             <label htmlFor="gmailId">Gmail ID</label>
             <input
+              name="email"
               className="connectLayout_registration"
               type="email"
               id="gmailId"
@@ -57,22 +95,24 @@ const Signin = () => {
             />
             <label htmlFor="password">Password</label>
             <input
+              name="password"
               className="connectLayout_registration"
               type="password"
               id="password"
               required
             />
           </div>
-          <Button
+          <button
+            type="submit"
             className="common-squadButton"
-            style={{ width: "fit-content", padding: "0rem 3rem" }}
+            style={{ width: "fit-content", padding: "0rem 3rem", cursor: "pointer" }}
           >
-            Connect Wallet
-          </Button>
+            Log in
+          </button>
           <p style={{ cursor: "pointer", color: "white" }}>
             Don't have an account? <a href="/signup">Signup</a>
           </p>
-        </div>
+        </form>
       </div>
     </>
   );

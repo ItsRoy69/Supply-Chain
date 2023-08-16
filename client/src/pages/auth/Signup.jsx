@@ -6,10 +6,15 @@ import "./auth.css";
 
 import {ethers} from "ethers";
 import Logo from "../../components/Logo";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+
   const [displayText, setDisplayText] = useState("Retailer");
   const [textTitle, setTextTitle] = useState("Distributor");
+
+  const navigate = useNavigate();
 
   const handleClick = () => {
     if (displayText === "Retailer") {
@@ -51,8 +56,9 @@ const Signup = () => {
 
   // function -> sendSignUpDataToDB
   const handleRegistration = async () => {
+    const loadingToast = toast.loading("Registering...");
     try {
-      const response = await fetch("http://localhost:5000/register", {
+      const response = await fetch("http://localhost:5000/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -68,8 +74,15 @@ const Signup = () => {
 
       const responseData = await response.json();
       console.log(responseData);
+      if(responseData.error) throw (responseData.error);
+      toast.success("Registered successfully");
+      navigate("/connect"); // navigate to login page
     } catch (error) {
       console.error("Error registering:", error);
+      toast.error(error ?? "Error registering");
+    }
+    finally {
+      toast.dismiss(loadingToast);
     }
   };
 

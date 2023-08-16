@@ -12,6 +12,7 @@ import chat_logo from "../../assets/chats.png";
 import profile_logo from "../../assets/profile.png";
 import help_logo from "../../assets/help.png";
 import "./sidebar.css";
+import { useUserContext } from "../../context/userContext";
 
 const Sidebar = ({ children, setIsLoggedIn, isLoggedIn }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +20,8 @@ const Sidebar = ({ children, setIsLoggedIn, isLoggedIn }) => {
   const sidebarToggle = () => {
     setIsOpen(!isOpen);
   };
+
+  const {logout} = useUserContext();
 
   const routes = [
     {
@@ -86,10 +89,10 @@ const Sidebar = ({ children, setIsLoggedIn, isLoggedIn }) => {
             );
           })}
         </div>
-        <div className="sidebar_bottom">
+        <button onClick={logout} className="sidebar_bottom">
           <img src={logout_logo} alt="logout" />
           {isOpen && <p>Logout</p>}
-        </div>
+        </button>
       </motion.div>
       {/* This main will render the individual pages */}
       <main className="dashcontent">{children}</main>

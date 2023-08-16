@@ -12,6 +12,11 @@ body {
   margin: 0;
 }
 
+button {
+  background: transparent;
+  border: none;
+}
+
 code,
 pre {
   font-size: 14px;
