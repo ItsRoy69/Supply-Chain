@@ -1,8 +1,15 @@
-import React, { useEffect, useState } from "react";
+import  {  useState } from "react";
+
+import "./teamFinderCard.css";
+import { motion } from "framer-motion";
+import { Backdrop } from "../../components/backdrop/Backdrop";
+import land_grad from "../../assets/land-grad.png";
 import "./retailer.css";
-import { FeedCard } from "./FeedCard";
-import { useNavigate } from "react-router-dom";
-import { TeamFinderCard } from "./TeamFinderCard";
+// import { FeedCard } from "./FeedCard";
+import "./feedcard.css";
+import feed_avatar from "../../assets/avatar2.png";
+// import { useNavigate } from "react-router-dom";
+// import { TeamFinderCard } from "./TeamFinderCard";
 import findATeammate from "../../assets/find_a_teammate.webp";
 import landingIntro from "../../assets/landing-intro.png";
 import searchimg from "../../assets/search.svg";
@@ -11,12 +18,16 @@ import peer from "../../assets/peer.svg";
 import writePost from "../../assets/writePost.svg";
 import { useUserContext } from "../../context/userContext";
 
-import { motion } from "framer-motion";
+
 
 const Retailer = (post) => {
   const { user } = useUserContext();
   const [modal, setModal] = useState(false);
-  // console.log(user);
+  const [cards, setCards] = useState([]);
+  const [title,setTitle] = useState("")
+  const [quantity,setQuantity] = useState(0)
+  const [product,setProduct] = useState("")
+  console.log("debugging cards===>", cards);
 
   return (
     <div className="dashboard" id={modal ? "blurr" : null}>
@@ -38,7 +49,86 @@ const Retailer = (post) => {
             </p>
           </motion.div>
         </div>
-        {modal && <TeamFinderCard setModal={setModal} />}
+        {modal && 
+        // <TeamFinderCard setModal={setModal} 
+        // />
+        <Backdrop onClick={() => setModal(false)}>
+        <motion.div
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          <div className="teamfindercardbody">
+            <img className="teamfindercardbg" src={land_grad} alt="gradient" />
+            <div className="teamfindercontent">
+              <h1>Ask your requirements</h1>
+              <form action="" className="teamfinderform">
+                <div className="teamfinderinputs">
+                  <h4>Title : </h4>
+                  <div className="inputbox">
+                    <input
+                      name="title"
+                      placeholder="Speceify your need"
+                      type="text"
+                      value={title}
+                      onChange={(e)=>{
+                        setTitle(e.target.value)
+                      }}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="teamfinderinputs">
+                  <h4>Product : </h4>
+                  <div className="inputbox">
+                    <input
+                      name="product"
+                      placeholder="Enter your product name"
+                      type="text"
+                      value={product}
+                      onChange={(e)=>{
+                        setProduct(e.target.value)
+                      }}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="teamfinderskills">
+                  <div className="teamfinderskillhead">
+                    <h4>Quantity : </h4>
+                    <div className="inputbox">
+                      <input
+                        name="quantity"
+                        placeholder="Enter the quantity of the product you are looking for"
+                        type="number"
+                        value={quantity}
+                        onChange={(e)=>{
+                          setQuantity(e.target.value)
+                        }}
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <div className="teamfindersubmit">
+                <div type="submit" id="sb" className="teamsubmit" onClick={()=>{
+                  setCards([...cards,{title:title,product:product,quantity:quantity}])
+                  setTitle("")
+                  setProduct("")
+                  setQuantity(0)
+                  setModal(false)
+
+                  
+                }}>
+                  Submit
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </Backdrop>
+        }
         <div className="feed-search">
           <h3>Feed Search</h3>
           <div className="inputbox">
@@ -59,7 +149,30 @@ const Retailer = (post) => {
             <img className="intro-right" src={landingIntro} alt="" />
           </div>
         </div>
-        <FeedCard post={post} />;
+        {cards.length>0 && cards.map((post)=>{
+          return(
+            <>   <div className="feed-card">
+            <div className="delete-card"></div>
+      
+            <div className="feed-cardleft">
+              <img src={feed_avatar} alt="Avatar" className="feed_avatar" />
+            </div>
+            <div className="feed-cardright">
+              <p className="feed-name">{post.title}</p>
+              {/* <p className="feed-time">12.43.415</p> */}
+              <div className="feed-description">
+                <p className="feed-title">Product type : {post.product}</p>
+                <div className="feedskills">
+                  <p>Quantity Required : {post.quantity}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          </>
+          
+          )
+        })}
+       
       </div>
 
       <div className="dashboard-summary">
@@ -77,13 +190,13 @@ const Retailer = (post) => {
               <img src={peer} alt="Peers" className="profileicon" />
               <div className="profilestats">
                 <p className="profilecount">12</p>
-                <p className="profilecount-sub">Peers</p>
+                <p className="profilecount-sub">Products</p>
               </div>
             </div>
             <div className="profile-card">
               <img src={writePost} alt="Posts" className="profileicon" />
               <div className="profilestats">
-                <p className="profilecount">12</p>
+                <p className="profilecount">{cards.length}</p>
                 <p className="profilecount-sub">Posts</p>
               </div>
             </div>
