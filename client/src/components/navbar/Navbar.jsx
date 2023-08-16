@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Row } from "antd";
 import { Link } from "react-router-dom";
-import "./Navbar.css";
+import "./navbar.css";
 import { useUserContext } from "../../context/userContext";
 import Logo from "../Logo";
 
