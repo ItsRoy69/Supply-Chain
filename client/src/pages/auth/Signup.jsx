@@ -1,20 +1,47 @@
-import React, {useState} from "react";
-import {Image} from "antd";
-import {Button} from "antd";
+import React, { useState, useEffect } from "react";
+
+import { Image } from "antd";
+import { Button } from "antd";
 import authimg from "../../assets/growth.svg";
 import "./auth.css";
 
-import {ethers} from "ethers";
+import { ethers } from "ethers";
 import Logo from "../../components/Logo";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-
   const [displayText, setDisplayText] = useState("Retailer");
   const [textTitle, setTextTitle] = useState("Distributor");
 
   const navigate = useNavigate();
+
+  const saveRegistrationDetailsToLocalStorage = () => {
+    const registrationDetails = {
+      name,
+      email,
+      password,
+      retailerId,
+      walletAddress: account || walletAddressInput,
+    };
+
+    localStorage.setItem(
+      "registrationDetails",
+      JSON.stringify(registrationDetails)
+    );
+  };
+
+  useEffect(() => {
+    const savedDetails = localStorage.getItem("registrationDetails");
+    if (savedDetails) {
+      const parsedDetails = JSON.parse(savedDetails);
+      setName(parsedDetails.name);
+      setEmail(parsedDetails.email);
+      setPassword(parsedDetails.password);
+      setRetailerId(parsedDetails.retailerId);
+      setWalletAddressInput(parsedDetails.walletAddress);
+    }
+  }, []);
 
   const handleClick = () => {
     if (displayText === "Retailer") {
@@ -74,16 +101,18 @@ const Signup = () => {
 
       const responseData = await response.json();
       console.log(responseData);
-      if(responseData.error) throw (responseData.error);
+      if (responseData.error) throw responseData.error;
+      saveRegistrationDetailsToLocalStorage();
       toast.success("Registered successfully");
       navigate("/connect"); // navigate to login page
     } catch (error) {
       console.error("Error registering:", error);
       toast.error(error ?? "Error registering");
-    }
-    finally {
+    } finally {
       toast.dismiss(loadingToast);
     }
+
+    
   };
 
   return (
@@ -174,31 +203,20 @@ const Signup = () => {
               </label>
             </div>
           </div>
-          {account ? (
-            <Button
-              className="common-squadButton"
-              style={{width: "fit-content", padding: "0rem 3rem"}}
-            >
-              {/* {account.slice(0, 10) + "..." + account.slice(38, 42)} */}
-              Metamask Connected
-            </Button>
-          ) : (
-            <Button
-              className="common-squadButton"
-              style={{width: "fit-content", padding: "0rem 3rem"}}
-              onClick={handleConnectMetamaskWallet}
-            >
-              Connect Metamask Wallet
-            </Button>
-          )}
           <Button
             className="common-squadButton"
-            style={{width: "fit-content", padding: "0rem 3rem"}}
-            onClick={handleRegistration}
+            style={{ width: "fit-content", padding: "0rem 3rem" }}
+            onClick={() => {
+              if (account) {
+                handleRegistration();
+              } else {
+                handleConnectMetamaskWallet();
+              }
+            }}
           >
-            Register Now
+            {account ? "Metamask Connected" : "Connect Metamask Wallet"}
           </Button>
-          <p style={{cursor: "pointer", color: "white"}}>
+          <p style={{ cursor: "pointer", color: "white" }}>
             Already have an account? <a href="/connect">Login</a>
           </p>
         </div>
