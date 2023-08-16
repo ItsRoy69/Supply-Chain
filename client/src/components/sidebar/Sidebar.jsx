@@ -1,29 +1,57 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import logout_logo from "../../assets/icons/logout.png";
-import hamburger_logo from "../../assets/icons/hamburger.png";
+import logout_logo from "../../assets/logout.png";
+import hamburger_logo from "../../assets/hamburger.png";
 import fullLogo from "../../assets/codz-full-logo.svg";
-import routes from "./sidebar_routes";
-import "./Sidebar.css";
+import article_logo from "../../assets/article.png";
+import hackathon_logo from "../../assets/hackathon.png";
+import dashboard_logo from "../../assets/dashboard.png";
+import chat_logo from "../../assets/chats.png";
+import profile_logo from "../../assets/profile.png";
+import help_logo from "../../assets/help.png";
+import "./sidebar.css";
 
 const Sidebar = ({ children, setIsLoggedIn, isLoggedIn }) => {
-  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   const sidebarToggle = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user_info");
-    localStorage.removeItem("user_spaces");
-    setIsLoggedIn(false);
-    navigate("/");
-  };
+  const routes = [
+    {
+      path: "/",
+      name: "Dashboard",
+      icon: dashboard_logo,
+    },
+    {
+      path: "/profile",
+      name: "My Profile",
+      icon: profile_logo,
+    },
+    {
+      path: "/hackathons",
+      name: "Hackathons",
+      icon: hackathon_logo,
+    },
+    {
+      path: "/articles",
+      name: "Articles",
+      icon: article_logo,
+    },
+    {
+      path: "/messages",
+      name: "Chats",
+      icon: chat_logo,
+    },
+    {
+      path: "/help",
+      name: "Help",
+      icon: help_logo,
+    },
+  ];
 
   return (
     <div className="sidebar-main">
@@ -58,7 +86,7 @@ const Sidebar = ({ children, setIsLoggedIn, isLoggedIn }) => {
             );
           })}
         </div>
-        <div className="sidebar_bottom" onClick={handleLogout}>
+        <div className="sidebar_bottom">
           <img src={logout_logo} alt="logout" />
           {isOpen && <p>Logout</p>}
         </div>
