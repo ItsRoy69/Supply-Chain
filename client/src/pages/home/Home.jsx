@@ -4,7 +4,6 @@ import heroimg from "../../assets/hero.svg";
 import belowimg from "../../assets/network.svg";
 import "./home.css";
 import Navbar from "../../components/navbar/Navbar";
-import Footer from "../../components/footer/Footer";
 
 const Home = () => {
   return (
@@ -14,12 +13,10 @@ const Home = () => {
         <div className="home-heroSection">
           <div className="home-homePageContainer-left">
             <div className="home-homePageContainer-left-title">
-              Collaborating with your Team Made Easier.
+              Simplifying Supply Chains
             </div>
             <div className="home-homePageContainer-left-subtitle">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-              eget libero fringilla arcu aliquam commodo. Ut consectetur dapibus
-              dolor.
+              Streamlining Distribution Systems for Efficient Management.
             </div>
           </div>
           <div className="home-homePageContainer-right">
@@ -29,8 +26,8 @@ const Home = () => {
 
         <div className="home-featuresSection">
           <h1 className="home-featuresTitle">
-            Store and Share Encrypted Files with your team seamlessly on
-            decentralized network.
+            Efficiently Sell Your Products: Simplify and Accelerate
+            Distribution, Minimizing Costs and Complexity
           </h1>
           <Image
             preview={false}
@@ -39,7 +36,6 @@ const Home = () => {
           />
         </div>
       </div>
-      <Footer />
     </>
   );
 };

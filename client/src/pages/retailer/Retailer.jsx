@@ -9,12 +9,12 @@ import searchimg from "../../assets/search.svg";
 import profile_pic from "../../assets/avatar2.png";
 import peer from "../../assets/peer.svg";
 import writePost from "../../assets/writePost.svg";
+import { useUserContext } from "../../context/userContext";
 
 import { motion } from "framer-motion";
 
 const Retailer = (post) => {
-  const navigate = useNavigate();
-
+  const { user } = useUserContext();
   const [modal, setModal] = useState(false);
   // console.log(user);
 
@@ -67,9 +67,9 @@ const Retailer = (post) => {
           <div className="profile-summary">
             <h1>Profile</h1>
             <img src={profile_pic} alt="avatar" className="profile-pic" />
-            <p className="username">fullname</p>
+            <p className="username">{user.name}</p>
 
-            <p className="title">Developer</p>
+            <p className="title">Retailer</p>
           </div>
 
           <div className="profile-stats">

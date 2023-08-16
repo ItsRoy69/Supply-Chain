@@ -1,21 +1,16 @@
 import React from "react";
 import { Button, Row } from "antd";
-import { Link } from "react-router-dom";
-import "./navbar.css";
-import { useUserContext } from "../../context/userContext";
-import Logo from "../Logo";
+import { useNavigate } from "react-router-dom";
+import "./Navbar.css";
 
 const Navbar = () => {
-
-  const {user} = useUserContext();
+  const navigate = useNavigate();
 
   return (
     <Row className="navbar-navbarContainer" align="middle" justify="space-between">
-      <Logo/>
-      <Button className="navbar-getStartedButton">
-      <Link to={user ? '/dashboard' : '/connect'}>
-        {user ? 'Dashboard' : 'Get Started'}
-      </Link>
+      <div className="navbar-logo">ESimplify</div>
+      <Button className="navbar-getStartedButton" onClick={() => navigate("/connect")}>
+        Get Started
       </Button>
     </Row>
   );

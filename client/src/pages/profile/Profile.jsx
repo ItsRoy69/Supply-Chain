@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./profile.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { motion } from "framer-motion";
+import { useUserContext } from "../../context/userContext";
 
 import avatar_pic from "../../assets/avatar2.png";
 import cover_pic from "../../assets/cover.jpg";
@@ -10,6 +10,8 @@ import github from "../../assets/github.svg";
 import linkedin from "../../assets/linkedin.svg";
 
 const Profile = () => {
+  const { user } = useUserContext();
+
   return (
     <div className="profile-main">
       <div className="profileedit">
@@ -33,8 +35,8 @@ const Profile = () => {
                 </span>
               </div>
               <div className="profiletxt">
-                <p className="profilename">Jyotirmoy Roy</p>
-                <p className="profileposition">Developer</p>
+                <p className="profilename">{user.name}</p>
+                <p className="profileposition">Retailer</p>
               </div>
             </div>
             <div className="profilesocials">
@@ -47,17 +49,7 @@ const Profile = () => {
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="profileskills">
-          <h2>Skills</h2>
-          <div className="profileskillssub">
-            <div className="skill-sub">
-              <p>You haven't added any skills yet</p>
-            </div>
-          </div>
-        </div>
-
+        </div>        
         <div className="profileabout">
           <h2>About</h2>
           <div className="profileaboutcard">
