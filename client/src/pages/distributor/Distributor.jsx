@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Distributor.css";
+import "./distributor.css";
 import { FeedCard } from "./FeedCard";
 import { useNavigate } from "react-router-dom";
 import landingIntro from "../../assets/landing-intro.png";
