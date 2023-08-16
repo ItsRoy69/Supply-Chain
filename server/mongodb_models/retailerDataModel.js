@@ -10,7 +10,7 @@ const retailerDataSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    // unique: true,
+    unique: true,
   },
   password: {
     type: String,
@@ -19,7 +19,7 @@ const retailerDataSchema = new mongoose.Schema({
   retailerId: {
     type: String,
     required: true,
-    // unique: true,
+    unique: true,
   },
   walletAddress: {
     type: String,

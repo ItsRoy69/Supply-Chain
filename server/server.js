@@ -8,9 +8,6 @@ const cors = require("cors");
 const connectDB = require("./mongodb_config");
 const port = process.env.PORT || 5000;
 
-// retailerModel
-const RetailerData = require("./mongodb_models/retailerDataModel");
-
 // mongoDBConnection
 connectDB();
 
@@ -21,20 +18,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-// POSTRoute -> RetailerRegistration
-app.post("/register", async (req, res) => {
-  try {
-    const retailer = new RetailerData(req.body);
-    await retailer.save();
-    res.status(201).json({
-      message: `Retailer registered successfully :))`,
-    });
-  } catch (error) {
-    console.error(error);
-    res
-      .status(500)
-      .json({error: "An error occurred while registering the retailer."});
-  }
-});
+app.use("/auth", require("./routes/auth.route"));
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
