@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import { Image } from "antd";
-import { Button } from "antd";
+import React, {useState} from "react";
+import {Image} from "antd";
+import {Button} from "antd";
 import authimg from "../../assets/growth.svg";
 import "./auth.css";
+
+import {ethers} from "ethers";
 
 const Signup = () => {
   const [displayText, setDisplayText] = useState("Retailer");
@@ -18,6 +20,28 @@ const Signup = () => {
     }
   };
 
+  // set -> metamaskAccounts
+  const [account, setAccount] = useState(null);
+
+  // function -> connectMetamaskWallet
+  const handleConnectMetamaskWallet = async () => {
+    if (typeof window.ethereum === "undefined") {
+      alert("Please install MetaMask to connect your wallet !");
+      return;
+    }
+
+    try {
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      const account = ethers.utils.getAddress(accounts[0]);
+      setAccount(account);
+      // // console.log(`Connected account : ${account}`);
+    } catch (error) {
+      console.error("Error connecting MetaMask:", error);
+    }
+  };
+
   return (
     <>
       <div className="connectLayout-connectLayoutContainer">
@@ -28,7 +52,11 @@ const Signup = () => {
             </a>
             <h3
               onClick={handleClick}
-              style={{ cursor: "pointer", padding: "8rem", textDecoration: "underline" }}
+              style={{
+                cursor: "pointer",
+                padding: "8rem",
+                textDecoration: "underline",
+              }}
             >
               I want to register as {displayText}
             </h3>
@@ -83,13 +111,23 @@ const Signup = () => {
               </label>
             </div>
           </div>
-          <Button
-            className="common-squadButton"
-            style={{ width: "fit-content", padding: "0rem 3rem" }}
-          >
-            Connect Wallet
-          </Button>
-          <p style={{ cursor: "pointer", color: "white" }}>
+          {account ? (
+            <Button
+              className="common-squadButton"
+              style={{width: "fit-content", padding: "0rem 3rem"}}
+            >
+              {account.slice(0, 10) + "..." + account.slice(38, 42)}
+            </Button>
+          ) : (
+            <Button
+              className="common-squadButton"
+              style={{width: "fit-content", padding: "0rem 3rem"}}
+              onClick={handleConnectMetamaskWallet}
+            >
+              Connect Metamask Wallet
+            </Button>
+          )}
+          <p style={{cursor: "pointer", color: "white"}}>
             Already have an account? <a href="/signin">Login</a>
           </p>
         </div>
