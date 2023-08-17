@@ -29,19 +29,34 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(email, password);
-    const retailer = await RetailerData.find({email});
-    const comparePassword = await bcrypt.compare(password, retailer[0].password);
-    console.log(comparePassword);
-    if (!comparePassword) {
-        throw new Error("Invalid password.");
+    const retailer = await RetailerData.findOne({ email });
+
+    if (!retailer) {
+      throw new Error("Retailer not found.");
     }
-    delete retailer[0].password;
-    res.status(200).json({user: retailer[0]});
+
+    const comparePassword = await bcrypt.compare(password, retailer.password);
+
+    if (!comparePassword) {
+      throw new Error("Invalid password.");
+    }
+
+    const user = {
+      name:retailer.name,
+      id: retailer._id,
+      email: retailer.email,
+      role: retailer.role // Assuming 'role' is a property in the RetailerData schema
+    };
+
+    res.status(200).json({ user });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: error.message ?? "An error occurred while registering the retailer." });
+    res.status(500).json({
+      error: error.message ?? "An error occurred while logging in."
+    });
   }
 };
+
+
 
 module.exports = { registerUser, loginUser };

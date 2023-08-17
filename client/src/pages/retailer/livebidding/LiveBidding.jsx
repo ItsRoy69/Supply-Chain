@@ -7,16 +7,15 @@ import { Select, Skeleton, Container, SimpleGrid, Flex } from "@mantine/core";
 import axios from "axios";
 
 const LiveBidding = () => {
-  const [search, setSearch] = useState("");
   const prodarray = JSON.parse(localStorage.getItem("myArray"));
   console.log("checking products for bidding===>", prodarray);
   const [liveBiddings, setLiveBiddings] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/deals/deal") // Update the endpoint as needed
+      .get("http://localhost:5000/deals/deal")
       .then((response) => {
-        setLiveBiddings(response.data); // Assuming the data is returned as an array of posts
+        setLiveBiddings(response.data);
       })
       .catch((error) => {
         console.error("Error fetching posts:", error);
@@ -56,9 +55,9 @@ const LiveBidding = () => {
           {liveBiddings.length > 0 ? (
             liveBiddings.map((bid) => (
               <motion.div
+                key={bid._id}
                 whileHover={{ scale: 1.05 }}
                 className="card"
-                key={bid.id}
               >
                 <h1 style={{ textTransform: "capitalize" }}>{bid.title}</h1>
                 <p className="time-txt">
@@ -67,14 +66,15 @@ const LiveBidding = () => {
                 {/* <p className="time">Auction ends at - {bid.auctionEnd}</p> */}
                 <p className="time-txt">Product rate: {bid.product}</p>
                 <p className="time-txt">Product quantity: {bid.quantity}</p>
-                {/* <p className="status">{bid.status}</p> */}
+                <p className="status">{bid.deal}</p>
                 <motion.div
                   whileTap={{ scale: 0.9 }}
                   className="participate-btn"
                   onClick={() => {
                     setLiveBiddings((prevBiddings) =>
-                      prevBiddings.filter((item) => item.id !== bid.id)
+                      prevBiddings.filter((item) => item._id !== bid._id)
                     );
+                    console.log("Deleted bid with ID:", bid._id);
                   }}
                 >
                   Delete

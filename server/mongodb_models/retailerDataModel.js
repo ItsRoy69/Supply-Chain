@@ -1,5 +1,3 @@
-// schema -> retailerDataSchema
-
 const mongoose = require("mongoose");
 
 const retailerDataSchema = new mongoose.Schema({
@@ -24,7 +22,11 @@ const retailerDataSchema = new mongoose.Schema({
   walletAddress: {
     type: String,
     required: true,
-    // unique: true,
+  },
+  role: {
+    type: String, // Assuming the role is stored as a string
+    required: true,
+    enum: ["distributor", "retailer"], // List of possible roles
   },
 });
 

@@ -4,10 +4,7 @@ import { motion } from "framer-motion";
 import { Backdrop } from "../../components/backdrop/Backdrop";
 import land_grad from "../../assets/land-grad.png";
 import "./retailer.css";
-// import { FeedCard } from "./FeedCard";
 import feed_avatar from "../../assets/avatar2.png";
-// import { useNavigate } from "react-router-dom";
-// import { TeamFinderCard } from "./TeamFinderCard";
 import findATeammate from "../../assets/business-need.svg";
 import landingIntro from "../../assets/landing-intro.png";
 import searchimg from "../../assets/search.svg";
@@ -28,14 +25,15 @@ const Retailer = (post) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/posts") // Update the endpoint as needed
+      .get("http://localhost:5000/posts")
       .then((response) => {
-        setCards(response.data); // Assuming the data is returned as an array of posts
+        setCards(response.data);
       })
       .catch((error) => {
         console.error("Error fetching posts:", error);
       });
   }, []);
+  
 
   return (
     <div className="dashboard" id={modal ? "blurr" : null}>
@@ -58,8 +56,6 @@ const Retailer = (post) => {
           </motion.div>
         </div>
         {modal && (
-          // <TeamFinderCard setModal={setModal}
-          // />
           <Backdrop onClick={() => setModal(false)}>
             <motion.div
               onClick={(e) => {

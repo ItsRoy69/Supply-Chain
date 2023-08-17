@@ -11,8 +11,8 @@ export const UserProvider = ({ children }) => {
     useEffect(() => {
         console.log('user changed', user);
         const localUser = JSON.parse(localStorage.getItem("walmart-user"));
-        if(user || localUser) {
-            setUser(prev => user ?? localUser)
+        if (user || localUser) {
+            setUser(prev => user ?? localUser);
             localStorage.setItem("walmart-user", JSON.stringify(user ?? localUser));
         };
     }, [user]);
@@ -26,7 +26,9 @@ export const UserProvider = ({ children }) => {
     const value = {
         user,
         setUser,
-        logout
+        logout,
+        isDistributor: user && user.role === "distributor", // Check if user is a distributor
+        isRetailer: user && user.role === "retailer" // Check if user is a retailer
     }
 
     return (

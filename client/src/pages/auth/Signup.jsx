@@ -83,37 +83,36 @@ const Signup = () => {
 
   // function -> sendSignUpDataToDB
   const handleRegistration = async () => {
-    const loadingToast = toast.loading("Registering...");
-    try {
-      const response = await fetch("http://localhost:5000/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-          retailerId,
-          walletAddress: account || walletAddressInput,
-        }),
-      });
+  const loadingToast = toast.loading("Registering...");
+  try {
+    const response = await fetch("http://localhost:5000/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+        retailerId,
+        walletAddress: account || walletAddressInput,
+        role: textTitle.toLowerCase()  // Assuming textTitle is either "Distributor" or "Retailer"
+      }),
+    });
 
-      const responseData = await response.json();
-      console.log(responseData);
-      if (responseData.error) throw responseData.error;
-      saveRegistrationDetailsToLocalStorage();
-      toast.success("Registered successfully");
-      navigate("/connect"); // navigate to login page
-    } catch (error) {
-      console.error("Error registering:", error);
-      toast.error(error ?? "Error registering");
-    } finally {
-      toast.dismiss(loadingToast);
-    }
-
-    
-  };
+    const responseData = await response.json();
+    console.log(responseData);
+    if (responseData.error) throw responseData.error;
+    saveRegistrationDetailsToLocalStorage();
+    toast.success("Registered successfully");
+    navigate("/connect"); // navigate to login page
+  } catch (error) {
+    console.error("Error registering:", error);
+    toast.error(error ?? "Error registering");
+  } finally {
+    toast.dismiss(loadingToast);
+  }
+};
 
   return (
     <>

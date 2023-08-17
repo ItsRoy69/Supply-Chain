@@ -27,9 +27,9 @@ const Distributor = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/posts") // Update the endpoint as needed
+      .get("http://localhost:5000/posts")
       .then((response) => {
-        setCards(response.data); // Assuming the data is returned as an array of posts
+        setCards(response.data);
       })
       .catch((error) => {
         console.error("Error fetching posts:", error);
@@ -67,7 +67,6 @@ const Distributor = () => {
           cards.map((post, index) => (
             <div key={index} className="feed-card">
               {" "}
-              {/* Add 'key' prop with 'index' */}
               <div className="delete-card"></div>
               <div className="feed-cardleft">
                 <img src={feed_avatar} alt="Avatar" className="feed_avatar" />
@@ -99,8 +98,6 @@ const Distributor = () => {
           ))}
 
         {modal && (
-          // <TeamFinderCard setModal={setModal}
-          // />
           <Backdrop onClick={() => setModal(false)}>
             <motion.div
               onClick={(e) => {
@@ -157,9 +154,10 @@ const Distributor = () => {
                           );
                           console.log("Deals created successfully!");
 
-                          const response = await axios.get("http://localhost:5000/posts");
+                          const response = await axios.get(
+                            "http://localhost:5000/posts"
+                          );
                           setCards(response.data);
-                          // You might want to update the local state with new data or reload the posts
                         } catch (error) {
                           console.error("Error creating deals:", error);
                         }

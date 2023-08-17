@@ -31,7 +31,8 @@ const Signin = () => {
     const formData = new FormData(e.target);
     const entries = Object.fromEntries(formData.entries());
     console.log(entries);
-    const loadingToast = toast.loading("Registering...");
+    const loadingToast = toast.loading("Logging in...");
+  
     try {
       const response = await fetch("http://localhost:5000/auth/login", {
         method: "POST",
@@ -40,21 +41,31 @@ const Signin = () => {
         },
         body: JSON.stringify(entries),
       });
-
+  
       const responseData = await response.json();
       console.log(responseData);
-      if(responseData.error) throw (responseData.error);
+      if (responseData.error) throw responseData.error;
+  
+      // Determine redirection based on user role
+      if (responseData.user.role === "distributor") {
+        navigate("/dashboard2");
+      } else if (responseData.user.role === "retailer") {
+        navigate("/dashboard");
+      } else {
+        // Handle unrecognized role
+        throw new Error("Unrecognized user role");
+      }
+  
+      setUser(responseData.user);
       toast.success("Logged in successfully");
-      setUser(prev => responseData.user);
-      navigate("/dashboard"); // navigate to login page
     } catch (error) {
       console.error("Error:", error);
       toast.error(error ?? "Error logging in");
-    }
-    finally {
+    } finally {
       toast.dismiss(loadingToast);
     }
-  }
+  };
+  
 
   return (
     <>
