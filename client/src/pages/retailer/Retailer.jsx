@@ -10,7 +10,7 @@ import "./feedcard.css";
 import feed_avatar from "../../assets/avatar2.png";
 // import { useNavigate } from "react-router-dom";
 // import { TeamFinderCard } from "./TeamFinderCard";
-import findATeammate from "../../assets/find_a_teammate.webp";
+import findATeammate from "../../assets/business-need.svg";
 import landingIntro from "../../assets/landing-intro.png";
 import searchimg from "../../assets/search.svg";
 import profile_pic from "../../assets/avatar2.png";
