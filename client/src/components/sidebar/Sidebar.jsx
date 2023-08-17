@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Button } from "antd";
 
 import logout_logo from "../../assets/logout.png";
 import hamburger_logo from "../../assets/hamburger.png";
 import fullLogo from "../../assets/codz-full-logo.svg";
-import article_logo from "../../assets/article.png";
 import hackathon_logo from "../../assets/hackathon.png";
 import dashboard_logo from "../../assets/dashboard.png";
 import chat_logo from "../../assets/chats.png";
@@ -84,10 +84,10 @@ const Sidebar = ({ children, setIsLoggedIn, isLoggedIn }) => {
             );
           })}
         </div>
-        <btn onClick={logout} className="sidebar_bottom">
+        <Button onClick={logout} className="sidebar_bottom">
           <img src={logout_logo} alt="logout" />
           {isOpen && <p>Logout</p>}
-        </btn>
+        </Button>
       </motion.div>
       {/* This main will render the individual pages */}
       <main className="dashcontent">{children}</main>
