@@ -8,7 +8,7 @@ const Navbar = () => {
 
   return (
     <Row className="navbar-navbarContainer" align="middle" justify="space-between">
-      <div className="navbar-logo">ESimplify</div>
+      <div className="navbar-logo">EzMart</div>
       <Button className="navbar-getStartedButton" onClick={() => navigate("/connect")}>
         Get Started
       </Button>
